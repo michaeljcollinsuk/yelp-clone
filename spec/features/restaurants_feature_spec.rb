@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'restaurants' do
-  
+
   context 'no restaurants have been added' do
     scenario 'should display a prompt to add a restaurant' do
       visit '/restaurants'
@@ -34,6 +34,19 @@ feature 'restaurants' do
       expect(current_path).to eq '/restaurants'
     end
   end
+
+  context 'viewing restaurants' do
+
+    let!(:kfc){Restaurant.create(name: 'KFC')}
+
+    scenario 'lets a user view a restraurant' do
+      visit '/restaurants'
+      click_link 'KFC'
+      expect(page).to have_content 'KFC'
+      expect(current_path).to eq "/restaurants/#{kfc.id}"
+    end
+  end
+
 
 
 
