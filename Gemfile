@@ -56,4 +56,6 @@ group :test do
   # gem 'shoulda'
 
   gem 'shoulda-matchers', require: false
+
+  gem 'rspec-collection_matchers'
 end
