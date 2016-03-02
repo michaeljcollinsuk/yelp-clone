@@ -10,4 +10,10 @@ describe Restaurant, type: :model do
     expect(restaurant).to have(1).error_on(:name)
     expect(restaurant).not_to be_valid
   end
+
+  it 'is not valid unless it is a unique name' do
+    Restaurant.create(name: "Moe's Tavern")
+    restaurant = Restaurant.create(name: "Moe's Tavern")
+    expect(restaurant).to have(1).error_on(:name)
+  end
 end
