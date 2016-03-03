@@ -9,7 +9,7 @@ class Restaurant < ActiveRecord::Base
 
   def average_rating
     return 'n/a' if reviews.none?
-    reviews.inject(0) {|memo, review| memo + review.rating } / reviews.length
+    (reviews.inject(0) {|memo, review| memo + review.rating } / reviews.length).to_i
   end
 
 end

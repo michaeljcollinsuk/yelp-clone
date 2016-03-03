@@ -13,9 +13,9 @@ def add_restaurant(name='KFC')
   click_button 'Create Restaurant'
 end
 
-def add_review
+def add_review(rating=3)
   click_link 'Review KFC'
   fill_in "Thoughts", with: "so, so"
-  select "3", from: "Rating"
+  select rating, from: "Rating"
   click_button 'Leave review'
 end

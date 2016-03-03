@@ -76,7 +76,7 @@ feature 'restaurants' do
       click_button 'Update Restaurant'
       expect(page).to have_content 'Kentucky Fried Chicken'
       expect(current_path).to eq '/restaurants'
-    end    
+    end
   end
 
   context 'deleting restaurants' do
@@ -99,22 +99,33 @@ feature 'reviewing' do
   before do
     user_signs_up
     Restaurant.create(name: 'KFC')
+    visit '/restaurants'
   end
 
   scenario 'allows users to leave a review using a form' do
-    visit '/restaurants'
     add_review
     expect(current_path).to eq '/restaurants'
     expect(page).to have_content('so, so')
   end
 
   scenario 'allows users to delete a review' do
-    visit '/restaurants'
     add_review
     click_link 'KFC'
     click_link 'Delete Review'
     expect(current_path).to eq '/restaurants'
     expect(page).not_to have_content('so, so')
     expect(page).to have_content('Review deleted successfully')
+  end
+
+  scenario 'display average rating for review' do
+    add_review(1)
+    click_link 'Sign out'
+    user_signs_up('test2@email.com')
+    add_review(5)
+    expect(page).to have_content 'Average rating: ★★★☆☆'
+  end
+
+  scenario 'average rating should be "n/a" for restaurant with no reviews' do
+    expect(page).to have_content 'Average rating: n/a'
   end
 end
