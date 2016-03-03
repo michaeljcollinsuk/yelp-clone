@@ -55,8 +55,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :restaurants do
-    resources :reviews
+  resources :restaurants, shallow: :true do
+    resources :reviews do
+      resources :endorsements
+    end
   end
 
   root to: "restaurants#index"
