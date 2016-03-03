@@ -76,7 +76,7 @@ feature 'restaurants' do
       click_button 'Update Restaurant'
       expect(page).to have_content 'Kentucky Fried Chicken'
       expect(current_path).to eq '/restaurants'
-    end
+    end    
   end
 
   context 'deleting restaurants' do

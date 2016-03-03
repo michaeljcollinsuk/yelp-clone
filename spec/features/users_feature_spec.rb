@@ -53,6 +53,8 @@ feature 'User can sign in' do
   end
 
   context "two users" do
+    let!(:sneaky) {Restaurant.create(name: "Sneaky Restaurant")}
+
     before do
       user_signs_up
       add_restaurant
@@ -69,6 +71,11 @@ feature 'User can sign in' do
     it "user can only delete their own reviews" do
       click_link 'KFC'
       expect(page).not_to have_link 'Delete Review'
+    end
+
+    it "sneaky user cannot go to edit page directly" do
+      visit "/restaurants/#{sneaky.id}/edit"
+      expect(current_path).to eq '/restaurants'
     end
   end
 end
