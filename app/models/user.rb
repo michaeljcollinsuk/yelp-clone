@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   end
 
   has_many :restaurants
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
   has_many :reviewed_restaurants, through: :reviews, source: :restaurant
 
 end
