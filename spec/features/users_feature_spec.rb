@@ -56,6 +56,7 @@ feature 'User can sign in' do
     before do
       user_signs_up
       add_restaurant
+      add_review
       click_link('Sign out')
       user_signs_up('test2@email.com')
     end
@@ -65,8 +66,9 @@ feature 'User can sign in' do
       expect(page).not_to have_link 'Delete KFC'
     end
 
-    xit "user can only delete their own reviews" do
-
+    it "user can only delete their own reviews" do
+      click_link 'KFC'
+      expect(page).not_to have_link 'Delete Review'
     end
   end
 end
