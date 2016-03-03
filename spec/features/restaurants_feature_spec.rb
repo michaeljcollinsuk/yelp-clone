@@ -25,6 +25,11 @@ feature 'restaurants' do
   end
 
   context 'creating restaurants' do
+
+    before do
+      user_signs_up
+    end
+
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
       visit '/restaurants'
       click_link 'Add a restaurant'
@@ -59,7 +64,10 @@ feature 'restaurants' do
 
   context 'editing restaurants' do
 
-    before { Restaurant.create name: 'KFC' }
+    before do
+      user_signs_up
+      Restaurant.create(name: 'KFC')
+    end
 
     scenario 'let a user edit a restaurant' do
       visit '/restaurants'
@@ -72,7 +80,11 @@ feature 'restaurants' do
   end
 
   context 'deleting restaurants' do
-    before {Restaurant.create(name: 'KFC')}
+
+    before do
+      user_signs_up
+      Restaurant.create(name: 'KFC')
+    end
 
     scenario 'let a user delete a restaurant' do
       visit '/restaurants'

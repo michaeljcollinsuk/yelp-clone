@@ -16,12 +16,7 @@ feature 'User can sign in' do
 
   context "user signed in on the homepage" do
     before do
-      visit('/')
-      click_link('Sign up')
-      fill_in('Email', with: 'test@example.com')
-      fill_in('Password', with: 'testtest')
-      fill_in('Password confirmation', with: 'testtest')
-      click_button('Sign up')
+      user_signs_up
     end
 
     it "should see 'sign out' link" do
@@ -33,6 +28,15 @@ feature 'User can sign in' do
       visit('/')
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
+    end
+  end
+
+  context "user not signed in on the homepage" do
+    it "should not be able to add a restaurant" do
+      visit('/')
+      click_link('Add a restaurant')
+      expect(current_path).to eq '/users/sign_in'
+      expect(page).to have_content 'Log in'
     end
   end
 end
