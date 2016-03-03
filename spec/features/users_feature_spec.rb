@@ -44,6 +44,14 @@ feature 'User can sign in' do
       expect(current_path).to eq '/users/sign_in'
       expect(page).to have_content 'Log in'
     end
+
+    it "should not be able to add a review" do
+      Restaurant.create(name: 'KFC')
+      visit('/')
+      click_link('Review KFC')
+      expect(current_path).to eq '/users/sign_in'
+      expect(page).to have_content 'Log in'
+    end
   end
 
   context "two users" do
