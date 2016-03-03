@@ -12,6 +12,21 @@ feature 'User can sign in' do
       visit('/')
       expect(page).not_to have_link('Sign out')
     end
+
+    it "should not be able to add a restaurant" do
+      visit('/')
+      click_link('Add a restaurant')
+      expect(current_path).to eq '/users/sign_in'
+      expect(page).to have_content 'Log in'
+    end
+
+    it "should not be able to add a review" do
+      Restaurant.create(name: 'KFC')
+      visit('/')
+      click_link('Review KFC')
+      expect(current_path).to eq '/users/sign_in'
+      expect(page).to have_content 'Log in'
+    end
   end
 
   context "user signed in on the homepage" do
@@ -37,23 +52,6 @@ feature 'User can sign in' do
     end
   end
 
-  context "user not signed in on the homepage" do
-    it "should not be able to add a restaurant" do
-      visit('/')
-      click_link('Add a restaurant')
-      expect(current_path).to eq '/users/sign_in'
-      expect(page).to have_content 'Log in'
-    end
-
-    it "should not be able to add a review" do
-      Restaurant.create(name: 'KFC')
-      visit('/')
-      click_link('Review KFC')
-      expect(current_path).to eq '/users/sign_in'
-      expect(page).to have_content 'Log in'
-    end
-  end
-
   context "two users" do
     before do
       user_signs_up
@@ -65,6 +63,10 @@ feature 'User can sign in' do
     it "user can only edit/delete restaurant they created" do
       expect(page).not_to have_link 'Edit KFC'
       expect(page).not_to have_link 'Delete KFC'
+    end
+
+    xit "user can only delete their own reviews" do
+
     end
   end
 end
