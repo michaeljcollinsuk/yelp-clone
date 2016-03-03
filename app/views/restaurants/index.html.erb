@@ -3,7 +3,7 @@
     <h2><%= link_to restaurant.name, restaurant_path(restaurant) %></h2>
     <p><%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) if restaurant.user == current_user %></p>
     <p><%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete if restaurant.user == current_user %></p>
-    <p><%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant)%></p>
+    <p><%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) if current_user && !current_user.has_reviewed?(restaurant) %></p>
     <% if restaurant.reviews.any? %>
       <ul>
         <% restaurant.reviews.each do |review| %>

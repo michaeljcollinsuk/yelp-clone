@@ -96,7 +96,10 @@ feature 'restaurants' do
 end
 
 feature 'reviewing' do
-  before {Restaurant.create(name: 'KFC')}
+  before do
+    user_signs_up
+    Restaurant.create(name: 'KFC')
+  end
 
   scenario 'allows users to leave a review using a form' do
     visit '/restaurants'

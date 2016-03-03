@@ -29,6 +29,12 @@ feature 'User can sign in' do
       expect(page).not_to have_link('Sign in')
       expect(page).not_to have_link('Sign up')
     end
+
+    it 'can only review a restaurant once' do
+      add_restaurant
+      add_review
+      expect(page).not_to have_link("Review KFC")
+    end
   end
 
   context "user not signed in on the homepage" do

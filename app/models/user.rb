@@ -20,6 +20,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def has_reviewed?(restaurant)
+    reviewed_restaurants.include? restaurant
+  end
+
   has_many :restaurants
+  has_many :reviews
+  has_many :reviewed_restaurants, through: :reviews, source: :restaurant
 
 end
