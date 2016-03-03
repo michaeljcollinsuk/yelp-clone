@@ -19,4 +19,7 @@ class User < ActiveRecord::Base
       end
     end
   end
+
+  has_many :restaurants
+
 end

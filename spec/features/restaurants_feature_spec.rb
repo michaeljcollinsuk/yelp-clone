@@ -66,7 +66,7 @@ feature 'restaurants' do
 
     before do
       user_signs_up
-      Restaurant.create(name: 'KFC')
+      add_restaurant
     end
 
     scenario 'let a user edit a restaurant' do
@@ -83,7 +83,7 @@ feature 'restaurants' do
 
     before do
       user_signs_up
-      Restaurant.create(name: 'KFC')
+      add_restaurant
     end
 
     scenario 'let a user delete a restaurant' do
