@@ -6,6 +6,10 @@ class Restaurant < ActiveRecord::Base
 
   belongs_to :user
   validates :name, length: {minimum: 3}, uniqueness: true
-  # validates :user, uniqueness: { scope: :restaurant, message: "You have reviewed this restaurant already" }
+
+  def average_rating
+    return 'n/a' if reviews.none?
+    reviews.inject(0) {|memo, review| memo + review.rating } / reviews.length
+  end
 
 end
