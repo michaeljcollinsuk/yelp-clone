@@ -7,6 +7,7 @@ $(document).ready(function() {
 
     $.post(this.href, function(response) {
       endorsementCount.text(response.new_endorsement_count);
+      console.log(response)
     })
   })
 
