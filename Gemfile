@@ -57,6 +57,9 @@ group :test do
   # Use 'Capybara' as the testing framwork for running front-end tests
   gem 'capybara'
 
+  gem 'poltergeist'
+
+  gem 'database_cleaner'
 
   # gem 'shoulda'
 
