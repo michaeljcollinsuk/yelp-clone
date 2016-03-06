@@ -49,6 +49,15 @@ feature 'restaurants' do
         expect(page).to have_content 'error'
       end
     end
+
+    scenario 'user can add a picture' do
+      visit 'restaurants'
+      click_link 'Add a restaurant'
+      fill_in 'Name', with: 'KFC'
+      attach_file 'restaurant_image', Rails.root + 'spec/features/test.jpg'
+      click_button 'Create Restaurant'
+      expect(page).to have_selector("img[src*=test]")
+    end
   end
 
   context 'viewing restaurants' do
